@@ -8,7 +8,9 @@ class ArtistsController < ApplicationController
   end
 
   def new
-    @artist = Artist.new
+    preferences = Preference.last
+
+    if !preferences.allow_create_artists then redirect_to artists_path else @artist = Artist.new end
   end
 
   def create
